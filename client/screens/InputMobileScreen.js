@@ -45,10 +45,13 @@ const OTPScreen = () => {
         const result = await axios.post(`${BASE_URL}/api/auth/send-otp`, {
           mobileNumber,
         });
-        console.log(result);
+        if (!result?.data) return showErrorToast();
+
         setIsLoading(false);
         showSuccessToast();
-        navigation.navigate('OTPScreen');
+        navigation.navigate('OTPScreen', {
+          otpId: result?.data?.data?.otpId,
+        });
       } else {
         setTextError('Required*');
       }

@@ -32,6 +32,7 @@
     "react-native": "0.64.3",
     "react-native-animatable": "^1.3.3",
     "react-native-gesture-handler": "~2.1.0",
+    "react-native-otp-form": "^1.0.2",
     "react-native-paper": "^4.11.2",
     "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
