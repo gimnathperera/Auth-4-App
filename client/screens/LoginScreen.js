@@ -1,3 +1,4 @@
+import React, { useState, useRef } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import {
   StyleSheet,
@@ -6,17 +7,49 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
-import AppLoading from 'expo-app-loading';
 import { Formik } from 'formik';
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
+
 import { userLoginSchema } from '../common/validation.schema';
+import { BASE_URL } from '../common/contants';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const formikRef = useRef();
 
-  const handleLogin = (values) => {
-    console.log(values);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (values) => {
+    try {
+      setIsLoading(true);
+      const result = await axios.post(`${BASE_URL}/api/auth/login`, values);
+      setIsLoading(false);
+      showSuccessToast();
+      formikRef.current?.resetForm();
+    } catch (err) {
+      showErrorToast();
+      setIsLoading(false);
+    }
+  };
+
+  const showSuccessToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'User credential vaidated successfully',
+    });
+  };
+
+  const showErrorToast = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Error',
+      text2: 'Invalid credentials',
+    });
   };
 
   return (
@@ -35,6 +68,7 @@ const LoginScreen = () => {
         onSubmit={(values) => {
           handleLogin(values);
         }}
+        innerRef={formikRef}
       >
         {({ errors, handleChange, touched, values, handleSubmit }) => (
           <>
@@ -72,7 +106,11 @@ const LoginScreen = () => {
                 style={[styles.button, styles.buttonOutline]}
                 onPress={handleSubmit}
               >
-                <Text style={styles.buttonOutlineText}>Login</Text>
+                {isLoading ? (
+                  <ActivityIndicator size='small' color='#0782F9' />
+                ) : (
+                  <Text style={styles.buttonOutlineText}>Login</Text>
+                )}
               </TouchableOpacity>
             </View>
           </>

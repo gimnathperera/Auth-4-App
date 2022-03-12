@@ -20,6 +20,8 @@ const SignupScreen = ({ navigation }) => {
   const formikRef = useRef();
 
   const handleRegister = async (values) => {
+    // navigation.navigate('FaceRecognizeScreen');
+
     try {
       setIsLoading(true);
       const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
