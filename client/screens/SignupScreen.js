@@ -8,11 +8,19 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Formik } from 'formik';
+import axios from 'axios';
 import { userRegisterationSchema } from '../common/validation.schema';
+import { BASE_URL } from '../common/contants';
 
 const SignupScreen = ({ navigation }) => {
-  const handleRegister = (values) => {
+  const handleRegister = async (values) => {
     console.log(values);
+    try {
+      const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
+      console.log('>>===>> >>===>> result', result.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
