@@ -10,6 +10,7 @@ import SupportScreen from './screens/SupportScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
 import firebase from 'firebase/app';
 import RootStackScreen from './screens/RootStackScreen';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   const Drawer = createDrawerNavigator();
@@ -60,6 +61,7 @@ export default function App() {
         </Drawer.Navigator>
       )}
       {!user && <RootStackScreen />}
+      <Toast position='bottom' />
     </NavigationContainer>
   );
 }

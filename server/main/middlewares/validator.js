@@ -20,6 +20,7 @@ exports.register = [
         return value;
       }
     }),
+  check('mobileNumber', 'mobileNumber is required').not().isEmpty(),
 ];
 exports.sendOTP = [
   check('mobileNumber', 'mobileNumber is required').not().isEmpty(),

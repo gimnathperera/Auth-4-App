@@ -83,7 +83,14 @@ const AuthRoutes = {
         });
       }
 
-      const { username, fullName, email, password, confirmPassword } = req.body;
+      const {
+        username,
+        fullName,
+        email,
+        mobileNumber,
+        password,
+        confirmPassword,
+      } = req.body;
 
       const salt = await bcrypt.genSalt(10);
       let encryptedPassword = await bcrypt.hash(password, salt);
@@ -92,6 +99,7 @@ const AuthRoutes = {
         username,
         fullName,
         email,
+        mobileNumber,
         password: encryptedPassword,
         confirmPassword,
       };

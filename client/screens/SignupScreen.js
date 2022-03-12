@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,21 +6,46 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
 import { Formik } from 'formik';
 import axios from 'axios';
+import Toast from 'react-native-toast-message';
+
 import { userRegisterationSchema } from '../common/validation.schema';
 import { BASE_URL } from '../common/contants';
 
 const SignupScreen = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const formikRef = useRef();
+
   const handleRegister = async (values) => {
-    console.log(values);
     try {
+      setIsLoading(true);
       const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
-      console.log('>>===>> >>===>> result', result.data);
+      setIsLoading(false);
+      showSuccessToast();
+      formikRef.current?.resetForm();
     } catch (err) {
-      console.log(err);
+      showErrorToast();
+      setIsLoading(false);
     }
+  };
+
+  const showSuccessToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'User details submitted successfully',
+    });
+  };
+
+  const showErrorToast = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Error',
+      text2: 'User details submitted failed',
+    });
   };
 
   return (
@@ -33,6 +58,7 @@ const SignupScreen = ({ navigation }) => {
           onSubmit={(values) => {
             handleRegister(values);
           }}
+          innerRef={formikRef}
         >
           {({ errors, handleChange, touched, values, handleSubmit }) => (
             <>
@@ -80,6 +106,21 @@ const SignupScreen = ({ navigation }) => {
                   <Text style={styles.errorText}>{errors.email}</Text>
                 )}
                 <TextInput
+                  placeholder='Mobile Number'
+                  value={values.mobileNumber}
+                  onChangeText={handleChange('mobileNumber')}
+                  style={[
+                    styles.input,
+                    touched.mobileNumber &&
+                      errors.mobileNumber &&
+                      styles.inputError,
+                  ]}
+                  name='mobileNumber'
+                />
+                {touched.email && errors.email && (
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                )}
+                <TextInput
                   placeholder='Password'
                   value={values.password}
                   onChangeText={handleChange('password')}
@@ -116,7 +157,11 @@ const SignupScreen = ({ navigation }) => {
                   style={[styles.button, styles.buttonOutline]}
                   onPress={handleSubmit}
                 >
-                  <Text style={styles.buttonOutlineText}>Register</Text>
+                  {isLoading ? (
+                    <ActivityIndicator size='small' color='#0782F9' />
+                  ) : (
+                    <Text style={styles.buttonOutlineText}>Register</Text>
+                  )}
                 </TouchableOpacity>
               </View>
             </>
@@ -153,6 +198,7 @@ const initialFormValues = {
   username: '',
   fullName: '',
   email: '',
+  mobileNumber: '',
   password: '',
   confirmPassword: '',
 };

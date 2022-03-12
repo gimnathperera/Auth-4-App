@@ -21,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "react-native-toast-message": "^2.1.1"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
