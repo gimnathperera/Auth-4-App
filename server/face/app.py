@@ -115,7 +115,6 @@ def store_image():
         os.mkdir(target)
 
     file = request.files.get('file')
-
     filename = file.filename
     destination = '/'.join([target, filename])
 

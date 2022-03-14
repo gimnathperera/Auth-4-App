@@ -30,6 +30,7 @@ const LoginScreen = () => {
       setIsLoading(false);
       showSuccessToast();
       formikRef.current?.resetForm();
+      navigation.navigate('InputMobile');
     } catch (err) {
       showErrorToast();
       setIsLoading(false);
@@ -116,12 +117,6 @@ const LoginScreen = () => {
           </>
         )}
       </Formik>
-
-      <View>
-        <TouchableOpacity onPress={() => navigation.navigate('InputMobile')}>
-          <Text style={{ paddingTop: 20 }}> Go to OTP Screen</Text>
-        </TouchableOpacity>
-      </View>
 
       <View style={styles.textPrivate}>
         <Text style={styles.color_textPrivate}>

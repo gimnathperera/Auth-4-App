@@ -20,18 +20,19 @@ const SignupScreen = ({ navigation }) => {
   const formikRef = useRef();
 
   const handleRegister = async (values) => {
-    // navigation.navigate('FaceRecognizeScreen');
+    navigation.navigate('FaceRecognizeScreen');
 
-    try {
-      setIsLoading(true);
-      const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
-      setIsLoading(false);
-      showSuccessToast();
-      formikRef.current?.resetForm();
-    } catch (err) {
-      showErrorToast();
-      setIsLoading(false);
-    }
+    // try {
+    //   setIsLoading(true);
+    //   const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
+    //   setIsLoading(false);
+    //   showSuccessToast();
+    //   formikRef.current?.resetForm();
+    //   navigation.navigate('FaceRecognizeScreen');
+    // } catch (err) {
+    //   showErrorToast();
+    //   setIsLoading(false);
+    // }
   };
 
   const showSuccessToast = () => {
@@ -56,7 +57,7 @@ const SignupScreen = ({ navigation }) => {
         <Text style={styles.text}>Create an account</Text>
         <Formik
           initialValues={initialFormValues}
-          validationSchema={userRegisterationSchema}
+          // validationSchema={userRegisterationSchema}
           onSubmit={(values) => {
             handleRegister(values);
           }}
