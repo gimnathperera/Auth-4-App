@@ -11,6 +11,8 @@ from keras_vggface.utils import preprocess_input
 from scipy.spatial.distance import cosine
 from keras_vggface.vggface import VGGFace
 
+from PIL import Image
+
 APP_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Init app
@@ -99,7 +101,7 @@ def detect_user():
 
     file.save(destination)
 
-    old_image_path = 'images/' + user_id + '.png'
+    old_image_path = 'images/' + user_id + '.jpg'
     new_image_path = 'temp/' + filename
 
     result = verify_face(old_image_path, new_image_path)

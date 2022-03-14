@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
-import { useNavigation } from '@react-navigation/core';
 import { React, useState, useRef, useEffect } from 'react';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,8 +16,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Countries } from '../src/Countries';
 import { BASE_URL } from '../common/contants';
 
-const OTPScreen = () => {
+const OTPScreen = ({ route, navigation }) => {
   let textInput = useRef(null);
+  const { id } = route.params;
+
   const defaultCodeCountry = '+60';
   const defaultMaskCountry = '016 777 877';
   const [phoneNumber, setPhoneNumber] = useState();
@@ -29,8 +30,6 @@ const OTPScreen = () => {
   const [placeholder, setPlaceholder] = useState(defaultMaskCountry);
   const [isLoading, setIsLoading] = useState(false);
   const [textError, setTextError] = useState('');
-
-  const navigation = useNavigation();
 
   const onChangeNumber = (number) => {
     setTextError('');
@@ -51,6 +50,7 @@ const OTPScreen = () => {
         showSuccessToast();
         navigation.navigate('OTPScreen', {
           otpId: result?.data?.data?.otpId,
+          id: id,
         });
       } else {
         setTextError('Required*');

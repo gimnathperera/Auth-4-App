@@ -20,19 +20,24 @@ const SignupScreen = ({ navigation }) => {
   const formikRef = useRef();
 
   const handleRegister = async (values) => {
-    navigation.navigate('FaceRecognizeScreen');
-
-    // try {
-    //   setIsLoading(true);
-    //   const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
-    //   setIsLoading(false);
-    //   showSuccessToast();
-    //   formikRef.current?.resetForm();
-    //   navigation.navigate('FaceRecognizeScreen');
-    // } catch (err) {
-    //   showErrorToast();
-    //   setIsLoading(false);
-    // }
+    try {
+      setIsLoading(true);
+      const result = await axios.post(`${BASE_URL}/api/auth/register`, values);
+      if (result?.data) {
+        setIsLoading(false);
+        showSuccessToast();
+        formikRef.current?.resetForm();
+        navigation.navigate('FaceImageUploadScreen', {
+          id: result?.data?.data?.user?.id,
+        });
+      } else {
+        showErrorToast();
+        setIsLoading(false);
+      }
+    } catch (err) {
+      showErrorToast();
+      setIsLoading(false);
+    }
   };
 
   const showSuccessToast = () => {
@@ -57,7 +62,7 @@ const SignupScreen = ({ navigation }) => {
         <Text style={styles.text}>Create an account</Text>
         <Formik
           initialValues={initialFormValues}
-          // validationSchema={userRegisterationSchema}
+          validationSchema={userRegisterationSchema}
           onSubmit={(values) => {
             handleRegister(values);
           }}
@@ -120,8 +125,8 @@ const SignupScreen = ({ navigation }) => {
                   ]}
                   name='mobileNumber'
                 />
-                {touched.email && errors.email && (
-                  <Text style={styles.errorText}>{errors.email}</Text>
+                {touched.mobileNumber && errors.mobileNumber && (
+                  <Text style={styles.errorText}>{errors.mobileNumber}</Text>
                 )}
                 <TextInput
                   placeholder='Password'
@@ -219,6 +224,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 30,
   },
   inputContainer: {
     width: '80%',

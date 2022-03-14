@@ -6,7 +6,8 @@ import SignupScreen from './SignupScreen';
 import InputMobile from './InputMobileScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OTPScreen from './OTPScreen';
-import FaceRecognizeScreen from './FaceRecognizeScreen';
+import FaceImageUploadScreen from './FaceImageUploadScreen';
+import FaceImageRecognitionScreen from './FaceImageRecognitionScreen';
 
 const RootStack = createStackNavigator();
 
@@ -43,7 +44,14 @@ const RootStackScreen = () => {
       <RootStack.Screen name='Register' component={SignupScreen} />
       <RootStack.Screen name='InputMobile' component={InputMobile} />
       <RootStack.Screen name='OTPScreen' component={OTPScreen} />
-      <RootStack.Screen name='FaceRecognizeScreen' component={FaceRecognizeScreen} />
+      <RootStack.Screen
+        name='FaceImageUploadScreen'
+        component={FaceImageUploadScreen}
+      />
+      <RootStack.Screen
+        name='FaceImageRecognitionScreen'
+        component={FaceImageRecognitionScreen}
+      />
     </RootStack.Navigator>
   );
 };

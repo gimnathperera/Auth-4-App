@@ -11,7 +11,7 @@ import LoginScreen from './screens/LoginScreen';
 import SupportScreen from './screens/SupportScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
 import RootStackScreen from './screens/RootStackScreen';
-import FaceRecognizeScreen from './screens/FaceRecognizeScreen';
+import FaceImageUploadScreen from './screens/FaceImageUploadScreen';
 
 import firebase from 'firebase/app';
 
@@ -57,8 +57,8 @@ export default function App() {
           <Drawer.Screen name='SupportScreen' component={SupportScreen} />
           <Drawer.Screen name='BookmarkScreen' component={BookmarkScreen} />
           <Drawer.Screen
-            name='FaceRecognizeScreen'
-            component={FaceRecognizeScreen}
+            name='FaceImageUploadScreen'
+            component={FaceImageUploadScreen}
           />
           <Drawer.Screen
             name='Login'

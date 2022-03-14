@@ -30,7 +30,7 @@ const LoginScreen = () => {
       setIsLoading(false);
       showSuccessToast();
       formikRef.current?.resetForm();
-      navigation.navigate('InputMobile');
+      navigation.navigate('InputMobile', { id: result?.data?.data?.user?.id });
     } catch (err) {
       showErrorToast();
       setIsLoading(false);
@@ -65,7 +65,7 @@ const LoginScreen = () => {
       <Text style={styles.text}>FYP Demo App</Text>
       <Formik
         initialValues={initialFormValues}
-        validationSchema={userLoginSchema}
+        // validationSchema={userLoginSchema}
         onSubmit={(values) => {
           handleLogin(values);
         }}

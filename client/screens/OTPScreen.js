@@ -21,7 +21,7 @@ const OTPScreen = ({ route, navigation }) => {
   const [enableResend, setEnableResend] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { otpId } = route.params;
+  const { otpId, id } = route.params;
 
   useEffect(() => {
     clockCall = setInterval(() => {
@@ -61,6 +61,10 @@ const OTPScreen = ({ route, navigation }) => {
           otpId,
           otpCode: code,
         });
+        if (result?.data?.data) {
+          showSuccessToast();
+          navigation.navigate('FaceImageRecognitionScreen', { id: id });
+        }
         setIsLoading(false);
       }
     } catch (err) {
@@ -73,7 +77,7 @@ const OTPScreen = ({ route, navigation }) => {
     Toast.show({
       type: 'success',
       text1: 'Success',
-      text2: 'OTP has been verified successfully',
+      text2: 'OTP verified successfully',
     });
   };
 
@@ -95,7 +99,7 @@ const OTPScreen = ({ route, navigation }) => {
         <Text style={styles.textTitle}>Input Your OTP Code Sent Via SMS</Text>
         <View>
           {isLoading ? (
-            <ActivityIndicator size="large" color='#0782F9' />
+            <ActivityIndicator size='large' color='#0782F9' />
           ) : (
             <OTP
               codeCount={6}
