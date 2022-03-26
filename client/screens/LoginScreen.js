@@ -65,7 +65,7 @@ const LoginScreen = () => {
       <Text style={styles.text}>FYP Demo App</Text>
       <Formik
         initialValues={initialFormValues}
-        // validationSchema={userLoginSchema}
+        validationSchema={userLoginSchema}
         onSubmit={(values) => {
           handleLogin(values);
         }}
@@ -74,32 +74,36 @@ const LoginScreen = () => {
         {({ errors, handleChange, touched, values, handleSubmit }) => (
           <>
             <View style={styles.inputContainer}>
-              <TextInput
-                placeholder='Email'
-                value={values.email}
-                onChangeText={handleChange('email')}
-                style={[
-                  styles.input,
-                  touched.email && errors.email && styles.inputError,
-                ]}
-                keyboardType='email-address'
-              />
-              {touched.email && errors.email && (
-                <Text style={styles.errorText}>{errors.email}</Text>
-              )}
-              <TextInput
-                placeholder='Password'
-                value={values.password}
-                onChangeText={handleChange('password')}
-                style={[
-                  styles.input,
-                  touched.password && errors.password && styles.inputError,
-                ]}
-                secureTextEntry
-              />
-              {touched.password && errors.password && (
-                <Text style={styles.errorText}>{errors.password}</Text>
-              )}
+              <View>
+                <TextInput
+                  placeholder='Email'
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  style={[
+                    styles.input,
+                    touched.email && errors.email && styles.inputError,
+                  ]}
+                  keyboardType='email-address'
+                />
+                {touched.email && errors.email && (
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                )}
+              </View>
+              <View>
+                <TextInput
+                  placeholder='Password'
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  style={[
+                    styles.input,
+                    touched.password && errors.password && styles.inputError,
+                  ]}
+                  secureTextEntry
+                />
+                {touched.password && errors.password && (
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                )}
+              </View>
             </View>
 
             <View style={styles.buttonContainer}>
