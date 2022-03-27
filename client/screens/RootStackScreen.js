@@ -9,6 +9,7 @@ import OTPScreen from './OTPScreen';
 import FaceImageUploadScreen from './FaceImageUploadScreen';
 import FaceImageRecognitionScreen from './FaceImageRecognitionScreen';
 import FaceGrestureScreen from './FaceGrestureScreen';
+import HomeScreen from './HomeScreen';
 
 const RootStack = createStackNavigator();
 
@@ -57,6 +58,7 @@ const RootStackScreen = () => {
         name='FaceGrestureScreen'
         component={FaceGrestureScreen}
       />
+      <RootStack.Screen name='HomeScreen' component={HomeScreen} />
     </RootStack.Navigator>
   );
 };

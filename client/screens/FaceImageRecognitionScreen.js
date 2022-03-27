@@ -20,7 +20,7 @@ const FaceImageRecognitionScreen = ({ route, navigation }) => {
   const [selectedImage, setSelectedImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { id } = route.params;
+  const { id, fullName } = route.params;
 
   const onUpload = async () => {
     try {
@@ -47,6 +47,10 @@ const FaceImageRecognitionScreen = ({ route, navigation }) => {
                 text1: 'Success',
                 text2: 'Face ID verification successfully',
               });
+              navigation.navigate('FaceGrestureScreen', {
+                id,
+                fullName,
+              });
             } else {
               Toast.show({
                 type: 'error',
@@ -57,8 +61,6 @@ const FaceImageRecognitionScreen = ({ route, navigation }) => {
 
             setIsLoading(false);
           });
-
-        // navigation.navigate('Login');
       } else {
         Toast.show({
           type: 'error',

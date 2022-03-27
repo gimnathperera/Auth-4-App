@@ -18,7 +18,7 @@ import { BASE_URL } from '../common/contants';
 
 const OTPScreen = ({ route, navigation }) => {
   let textInput = useRef(null);
-  const { id } = route.params;
+  const { id, fullName } = route.params;
 
   const defaultCodeCountry = '+60';
   const defaultMaskCountry = '016 777 877';
@@ -51,6 +51,7 @@ const OTPScreen = ({ route, navigation }) => {
         navigation.navigate('OTPScreen', {
           otpId: result?.data?.data?.otpId,
           id: id,
+          fullName,
         });
       } else {
         setTextError('Required*');

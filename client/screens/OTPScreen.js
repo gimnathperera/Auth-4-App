@@ -21,7 +21,7 @@ const OTPScreen = ({ route, navigation }) => {
   const [enableResend, setEnableResend] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { otpId, id } = route.params;
+  const { otpId, id, fullName } = route.params;
 
   useEffect(() => {
     clockCall = setInterval(() => {
@@ -63,7 +63,10 @@ const OTPScreen = ({ route, navigation }) => {
         });
         if (result?.data?.data) {
           showSuccessToast();
-          navigation.navigate('FaceImageRecognitionScreen', { id: id });
+          navigation.navigate('FaceImageRecognitionScreen', {
+            id: id,
+            fullName,
+          });
         }
         setIsLoading(false);
       }
