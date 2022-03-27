@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import OTPScreen from './OTPScreen';
 import FaceImageUploadScreen from './FaceImageUploadScreen';
 import FaceImageRecognitionScreen from './FaceImageRecognitionScreen';
+import FaceGrestureScreen from './FaceGrestureScreen';
+import HomeScreen from './HomeScreen';
 
 const RootStack = createStackNavigator();
 
@@ -52,6 +54,11 @@ const RootStackScreen = () => {
         name='FaceImageRecognitionScreen'
         component={FaceImageRecognitionScreen}
       />
+      <RootStack.Screen
+        name='FaceGrestureScreen'
+        component={FaceGrestureScreen}
+      />
+      <RootStack.Screen name='HomeScreen' component={HomeScreen} />
     </RootStack.Navigator>
   );
 };

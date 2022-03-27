@@ -24,17 +24,23 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (values) => {
-    try {
-      setIsLoading(true);
-      const result = await axios.post(`${BASE_URL}/api/auth/login`, values);
-      setIsLoading(false);
-      showSuccessToast();
-      formikRef.current?.resetForm();
-      navigation.navigate('InputMobile', { id: result?.data?.data?.user?.id });
-    } catch (err) {
-      showErrorToast();
-      setIsLoading(false);
-    }
+    navigation.navigate('FaceGrestureScreen', {
+      fullName: 'Json',
+    });
+    // try {
+    //   setIsLoading(true);
+    //   const result = await axios.post(`${BASE_URL}/api/auth/login`, values);
+    //   setIsLoading(false);
+    //   showSuccessToast();
+    //   formikRef.current?.resetForm();
+    //   navigation.navigate('InputMobile', {
+    //     id: result?.data?.data?.user?.id,
+    //     fullName: result?.data?.data?.user?.fullName,
+    //   });
+    // } catch (err) {
+    //   showErrorToast();
+    //   setIsLoading(false);
+    // }
   };
 
   const showSuccessToast = () => {
@@ -65,7 +71,7 @@ const LoginScreen = () => {
       <Text style={styles.text}>FYP Demo App</Text>
       <Formik
         initialValues={initialFormValues}
-        validationSchema={userLoginSchema}
+        // validationSchema={userLoginSchema}
         onSubmit={(values) => {
           handleLogin(values);
         }}
